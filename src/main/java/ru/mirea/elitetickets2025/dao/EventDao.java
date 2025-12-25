@@ -3,6 +3,7 @@ package ru.mirea.elitetickets2025.dao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.mirea.elitetickets2025.mappers.EventMapper;
+import ru.mirea.elitetickets2025.models.SearchResponse;
 import ru.mirea.elitetickets2025.repositories.EventRepository;
 
 
@@ -14,6 +15,7 @@ public class EventDao {
 
     private final EventMapper eventMapper;
 
-    // TODO создать модель, подключить ее в маппере и определить методы
-    // ....
+    public SearchResponse FilterEvents() {
+        return new SearchResponse();
+    }
 }

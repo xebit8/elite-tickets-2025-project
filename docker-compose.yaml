@@ -17,5 +17,25 @@ services:
       start_period: 10s
       retries: 5
     env_file: .env
+    networks:
+      - elite-network
+
+  elite-spring:
+    build: .
+    container_name: elite_spring
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      elite-postgres:
+        condition: service_healthy
+    networks:
+      - elite-network
+    env_file: .env
+
 volumes:
   elite-postgres_data:
+
+networks:
+  elite-network:
+    driver: bridge
