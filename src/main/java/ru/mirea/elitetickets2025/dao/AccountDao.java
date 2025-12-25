@@ -34,11 +34,11 @@ public class AccountDao {
         account.setEmail(email);
         account.setPassword(password);
 
-        if (role == Roles.USER) {
-            dsds
-        } else {
-            sdsdsd
-        }
+//        if (role == Roles.USER) {
+//            dsds
+//        } else {
+//            sdsdsd
+//        }
 
         return accountMapper.entityToModel(accountRepository.save(account));
     }

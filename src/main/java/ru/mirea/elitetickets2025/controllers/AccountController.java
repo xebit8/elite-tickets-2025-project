@@ -2,10 +2,14 @@ package ru.mirea.elitetickets2025.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import ru.mirea.elitetickets2025.dto.request.AuthRequest;
 import ru.mirea.elitetickets2025.dto.response.AccountResponse;
 import ru.mirea.elitetickets2025.dto.request.RegistrationRequest;
+import ru.mirea.elitetickets2025.dto.response.AuthResponse;
 import ru.mirea.elitetickets2025.models.AccountModel;
 import ru.mirea.elitetickets2025.services.AccountService;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/accounts")
@@ -13,15 +17,25 @@ import ru.mirea.elitetickets2025.services.AccountService;
 public class AccountController {
     private final AccountService accountService;
     @GetMapping("/{email}")
-    public AccountModel getAccountByEmail(String email){
+    public AccountModel getAccountByEmail(@PathVariable String email){
         return accountService.findAccountByEmail(email);
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public AccountResponse registerAccount(@RequestBody RegistrationRequest request){
         AccountModel accountModel = accountService.registerAccount(request.getEmail(), request.getPassword(), request.getRole());
+        String accountEmail = accountModel.getEmail();
+        UUID accountId = accountService.getAccountIdByEmail(accountEmail);
 
-        return new AccountResponse(accountModel.getId(), accountModel.getEmail());
+        return new AccountResponse(accountId, accountEmail);
+    }
+
+    @PostMapping("/login")
+    public AuthResponse loginAccount(@RequestBody AuthRequest request) {
+        String accountEmail = request.getEmail();
+        AccountModel accountModel = accountService.findAccountByEmail(accountEmail);
+        String accountAuth = accountService.loginAccount(accountModel);
+        return new AuthResponse(); // Надо реализовать JWT
     }
 
 }

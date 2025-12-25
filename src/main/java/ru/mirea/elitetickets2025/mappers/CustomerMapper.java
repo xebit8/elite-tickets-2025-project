@@ -9,9 +9,7 @@ import ru.mirea.elitetickets2025.models.CustomerModel;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CustomerMapper {
-    @Mapping(source = "accountEmail", target = "account.email")
     Customer modelToEntity(CustomerModel customerModel);
 
-    @Mapping(source = "account.email", target = "accountEmail")
     CustomerModel entityToModel(Customer customer);
 }

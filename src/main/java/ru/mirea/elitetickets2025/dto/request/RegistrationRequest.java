@@ -9,7 +9,7 @@ import ru.mirea.elitetickets2025.models.enums.Roles;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegistrationRequest {
-    String email;
-    String password;
-    Roles role; // VOLONTEER/USER/ADMIN, По умолчанию передаём USER
+    private String email;
+    private String password;
+    private Roles role; // VOLONTEER/USER/ADMIN, По умолчанию передаём USER
 }
