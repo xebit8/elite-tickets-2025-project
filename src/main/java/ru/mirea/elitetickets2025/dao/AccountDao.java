@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.mirea.elitetickets2025.entities.Account;
 import ru.mirea.elitetickets2025.mappers.AccountMapper;
 import ru.mirea.elitetickets2025.models.AccountModel;
+import ru.mirea.elitetickets2025.models.enums.Roles;
 import ru.mirea.elitetickets2025.repositories.AccountRepository;
 
 import java.util.UUID;
@@ -28,10 +29,16 @@ public class AccountDao {
         return accountMapper.entityToModel(account);
     }
 
-    public AccountModel addNewAccount(String email, String password){
+    public AccountModel addNewAccount(String email, String password, Roles role){
         Account account = new Account();
         account.setEmail(email);
         account.setPassword(password);
+
+        if (role == Roles.USER) {
+            dsds
+        } else {
+            sdsdsd
+        }
 
         return accountMapper.entityToModel(accountRepository.save(account));
     }

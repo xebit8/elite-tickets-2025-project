@@ -26,4 +26,10 @@ public class AccountServiceImpl implements AccountService {
             return "No no mister fish";
         }
     }
+
+    @Override
+    public AccountModel findAccountByEmail(String email) {
+
+        return accountDao.findAccountByEmail(email);
+    }
 }
