@@ -8,8 +8,7 @@ import java.util.UUID;
 public interface AccountService {
 
     AccountModel registerAccount(String email, String password, Roles role);
-
-    String loginAccount(AccountModel accountModel);
+    String loginAccount(String email, String password);
 
     AccountModel findAccountByEmail(String email);
 

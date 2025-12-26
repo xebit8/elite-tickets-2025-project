@@ -1,6 +1,7 @@
 package ru.mirea.elitetickets2025.dao;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.mirea.elitetickets2025.entities.Account;
 import ru.mirea.elitetickets2025.mappers.AccountMapper;
@@ -18,6 +19,8 @@ public class AccountDao {
 
     private final AccountMapper accountMapper;
 
+    private final PasswordEncoder passwordEncoder;
+
     public UUID getAccountIdByEmail(String email){
         Account account = accountRepository.findByEmail(email);
         return account.getId();
@@ -32,13 +35,8 @@ public class AccountDao {
     public AccountModel addNewAccount(String email, String password, Roles role){
         Account account = new Account();
         account.setEmail(email);
-        account.setPassword(password);
-
-//        if (role == Roles.USER) {
-//            dsds
-//        } else {
-//            sdsdsd
-//        }
+        account.setPassword(passwordEncoder.encode(password));
+//        account.setRole(role != null ? role : Roles.USER);
 
         return accountMapper.entityToModel(accountRepository.save(account));
     }
